@@ -12,7 +12,7 @@ const TestemonialForm = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/testimonials', {
+      const response = await axios.post('https://epics-final-9yio.onrender.com/api/testimonials', {
         username,
         email,
         comment,
@@ -86,7 +86,7 @@ const TestemonialForm = ({ user }) => {
                 value={index + 1}
                 onChange={() => setRating(index + 1)}
                 className="mask mask-star-2 bg-orange-400"
-                
+
               />
             ))}
           </div>

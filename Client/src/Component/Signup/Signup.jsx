@@ -20,7 +20,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const url = "http://localhost:8080/api/users";
+            const url = "https://epics-final-9yio.onrender.com/api/users";
             const response = await axios.post(url, data);
             navigate("/login");
             console.log(response.data.message);

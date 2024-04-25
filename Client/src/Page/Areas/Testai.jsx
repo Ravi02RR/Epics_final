@@ -88,7 +88,7 @@ const Testai = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:8080/api/areas/",
+        "https://epics-final-9yio.onrender.com/api/areas/",
         JSON.parse(editedJson),
         { headers: { "Content-Type": "application/json" } }
       );
@@ -97,9 +97,9 @@ const Testai = () => {
     } catch (error) {
       console.error("Error posting data:", error);
     } finally {
-      
+
       setLoadingConvert(false);
-     
+
     }
   };
 
@@ -115,7 +115,7 @@ const Testai = () => {
 
       map.addListener('polygoncomplete', (polygon) => {
         const coordinates = polygon.getPath().getArray();
-      
+
         const center = coordinates.reduce((acc, curr) => {
           acc.lat += curr.lat();
           acc.lng += curr.lng();
@@ -123,13 +123,13 @@ const Testai = () => {
         }, { lat: 0, lng: 0 });
         center.lat /= coordinates.length;
         center.lng /= coordinates.length;
-      
+
         setLatitude(center.lat);
         setLongitude(center.lng);
-      
+
         fetchData();
       });
-      
+
       map.addListener('load', function () {
         var options = {
           fillColor: "red",

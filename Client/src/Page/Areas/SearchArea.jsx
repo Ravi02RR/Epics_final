@@ -14,7 +14,7 @@ const SearchArea = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/search?query=${searchQuery}`
+        `https://epics-final-9yio.onrender.com/api/search?query=${searchQuery}`
       );
       const data = response.data;
       setRecommendations(data);
@@ -30,7 +30,7 @@ const SearchArea = () => {
         setSuggestions([]);
       } else {
         const response = await axios.get(
-          `http://localhost:8080/api/search-suggestions?query=${value}`
+          `https://epics-final-9yio.onrender.com/api/search-suggestions?query=${value}`
         );
         const data = response.data;
         setSuggestions(data);
@@ -53,7 +53,7 @@ const SearchArea = () => {
     const fetchAllAreas = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/areas`
+          `https://epics-final-9yio.onrender.com/api/areas`
         );
         const data = response.data;
         setRecommendations(data);

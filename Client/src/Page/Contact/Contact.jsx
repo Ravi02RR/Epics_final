@@ -20,7 +20,7 @@ const Contact = ({ name }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8080/api/contact', formData);
+            await axios.post('https://epics-final-9yio.onrender.com/api/contact', formData);
             setSuccessMessage('Your message has been submitted successfully!');
             setFormData({ name: '', email: '', phoneNumber: '', message: '' });
         } catch (error) {

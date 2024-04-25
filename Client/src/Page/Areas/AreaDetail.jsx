@@ -14,7 +14,7 @@ function AreaDetail() {
 
   const fetchAreaDetail = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/areas/${id}`);
+      const response = await axios.get(`https://epics-final-9yio.onrender.com/api/areas/${id}`);
       setArea(response.data);
       setLoading(false);
     } catch (error) {

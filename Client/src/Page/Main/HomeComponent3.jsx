@@ -9,7 +9,7 @@ const HomeComponent3 = () => {
     useEffect(() => {
         const fetchTestimonials = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/testimonials');
+                const response = await axios.get('https://epics-final-9yio.onrender.com/api/testimonials');
                 setTestimonials(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -22,7 +22,7 @@ const HomeComponent3 = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/api/testimonials/${id}`);
+            await axios.delete(`https://epics-final-9yio.onrender.com/api/testimonials/${id}`);
             setTestimonials(testimonials.filter((testimonial) => testimonial._id !== id));
         } catch (error) {
             console.error('Error deleting testimonial:', error);
@@ -45,7 +45,7 @@ const HomeComponent3 = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
                             {testimonials.map((testimonial, index) => (
                                 <Cardtest
-                                    
+
                                     key={index}
                                     username={testimonial.username}
                                     email={testimonial.email}
