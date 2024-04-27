@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Groq from "groq-sdk";
 import { toast } from "react-toastify";
 
@@ -14,6 +14,8 @@ const ChatBot = () => {
     const USERICON = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
     const apiKey = "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";
+
+    const chatContainerRef = useRef(null);
 
     const handleInputChange = (event) => {
         setInputText(event.target.value);
@@ -34,12 +36,10 @@ const ChatBot = () => {
             const email = localStorage.getItem("email");
             const key = `chatMessages_${email}`;
 
-
             setMessages((prevMessages) => [
                 ...prevMessages,
                 { text: inputText, sender: "user" },
             ]);
-
 
             const chatCompletion = await groq.chat.completions.create({
                 messages: [
@@ -60,24 +60,19 @@ const ChatBot = () => {
                 stop: null,
             });
 
-
             for await (const chunk of chatCompletion) {
                 s += chunk.choices[0]?.delta?.content || "";
             }
-
 
             setMessages((prevMessages) => [
                 ...prevMessages,
                 { text: s, sender: "bot" },
             ]);
 
-
             localStorage.setItem(key, JSON.stringify([...messages, { text: inputText, sender: "user" }, { text: s, sender: "bot" }]));
-
 
             setInputText("");
         } catch (e) {
-
             toast("Error! Cannot process request ", {
                 type: "error",
                 position: "top-center",
@@ -94,8 +89,8 @@ const ChatBot = () => {
     };
 
     useEffect(() => {
-        console.log(inputText);
-    }, [inputText]);
+        chatContainerRef.current.scrollTo(0, chatContainerRef.current.scrollHeight);
+    }, [messages]);
 
     return (
         <div className="container mx-auto">
@@ -104,7 +99,7 @@ const ChatBot = () => {
                     <img src={LOGO} className="h-10 rounded-full" alt="" />
                     <span className="ml-2 text-lg font-semibold text-gray-800">LandOpti</span>
                 </div>
-                <div className="chat-box mt-4 max-h-80 overflow-y-auto">
+                <div ref={chatContainerRef} className="chat-box mt-4 max-h-80 overflow-y-auto">
                     {messages.map((message, index) => (
                         <div key={index} className={`chat ${message.sender === "user" ? "chat-end" : "chat-start"}`}>
                             <div className="flex items-start">
@@ -123,7 +118,6 @@ const ChatBot = () => {
                         value={inputText}
                         onChange={handleInputChange}
                         onKeyPress={handleKeyPress}
-
                     />
                     <button onClick={chatResp} className="ml-2 flex-shrink-0 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
