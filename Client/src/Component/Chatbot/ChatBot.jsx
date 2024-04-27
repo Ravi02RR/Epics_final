@@ -102,7 +102,7 @@ const ChatBot = () => {
             <div className="bg-base p-4 rounded shadow-md my-4">
                 <div className="flex items-center">
                     <img src={LOGO} className="h-10 rounded-full" alt="" />
-                    <span className="ml-2 text-lg font-semibold text-gray-800">LandOtmi</span>
+                    <span className="ml-2 text-lg font-semibold text-gray-800">LandOpti</span>
                 </div>
                 <div className="chat-box mt-4 max-h-80 overflow-y-auto">
                     {messages.map((message, index) => (

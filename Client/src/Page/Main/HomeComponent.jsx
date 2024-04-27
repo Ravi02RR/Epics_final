@@ -31,14 +31,14 @@ const HomeComponent = () => {
                         </div>
                         <div className="mt-3 sm:mt-0 sm:ml-3">
                             <button onClick={() => document.getElementById('my_modal_4').showModal()} className="  w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-regular rounded-md text-yellow-700 bg-yellow-100 hover:text-yellow-600 hover:bg-yellow-50 focus:outline-none focus:shadow-outline-yellow focus:border-yellow-300 transition duration-150 ease-in-out md:py-4 md:px-10">
-                                Takl to LandOtmi
+                                Talk to LandOpti !
                             </button>
                         </div>
                     </div>
                 </div>
                 <dialog id="my_modal_4" className="modal">
                     <div className="modal-box w-11/12 max-w-5xl">
-                        <h3 className="font-bold text-lg">LandOpti Live Demo</h3>
+                        <h3 className="font-bold text-lg">LandOpti Chat Bot</h3>
                         <ChatBot />
                         <div className="modal-action">
                             <form method="dialog">
