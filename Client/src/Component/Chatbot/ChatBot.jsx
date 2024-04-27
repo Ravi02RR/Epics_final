@@ -26,6 +26,10 @@ const ChatBot = () => {
 
     const chatResp = async () => {
         try {
+            if (inputText.trim() === "") {
+                alert("Please enter a message");
+                return;
+            }
             let s = "";
             const email = localStorage.getItem("email");
             const key = `chatMessages_${email}`;
@@ -113,12 +117,13 @@ const ChatBot = () => {
                 <div className="mt-4 flex">
                     <input
                         type="text"
+                        required
                         className="w-full border rounded-lg p-2 focus:outline-none focus:ring focus:border-red-300"
                         placeholder="Type your message..."
                         value={inputText}
                         onChange={handleInputChange}
                         onKeyPress={handleKeyPress}
-                        required
+
                     />
                     <button onClick={chatResp} className="ml-2 flex-shrink-0 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
