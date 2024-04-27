@@ -30,13 +30,13 @@ const ChatBot = () => {
             const email = localStorage.getItem("email");
             const key = `chatMessages_${email}`;
 
-        
+
             setMessages((prevMessages) => [
                 ...prevMessages,
                 { text: inputText, sender: "user" },
             ]);
 
-         
+
             const chatCompletion = await groq.chat.completions.create({
                 messages: [
                     {
@@ -56,24 +56,24 @@ const ChatBot = () => {
                 stop: null,
             });
 
-            
+
             for await (const chunk of chatCompletion) {
                 s += chunk.choices[0]?.delta?.content || "";
             }
 
-           
+
             setMessages((prevMessages) => [
                 ...prevMessages,
                 { text: s, sender: "bot" },
             ]);
 
-            
+
             localStorage.setItem(key, JSON.stringify([...messages, { text: inputText, sender: "user" }, { text: s, sender: "bot" }]));
 
-            
+
             setInputText("");
         } catch (e) {
-           
+
             toast("Error! Cannot process request ", {
                 type: "error",
                 position: "top-center",
@@ -118,6 +118,7 @@ const ChatBot = () => {
                         value={inputText}
                         onChange={handleInputChange}
                         onKeyPress={handleKeyPress}
+                        required
                     />
                     <button onClick={chatResp} className="ml-2 flex-shrink-0 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
