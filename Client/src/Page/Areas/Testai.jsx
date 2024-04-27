@@ -88,7 +88,7 @@ const Testai = () => {
       }
 
       const response = await axios.post(
-        "https://epics-final-9yio.onrender.com/api/areas/",
+        "https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/areas/",
         JSON.parse(editedJson),
         { headers: { "Content-Type": "application/json" } }
       );

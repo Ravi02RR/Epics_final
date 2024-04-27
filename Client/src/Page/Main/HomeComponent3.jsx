@@ -9,7 +9,7 @@ const HomeComponent3 = () => {
     useEffect(() => {
         const fetchTestimonials = async () => {
             try {
-                const response = await axios.get('https://epics-final-9yio.onrender.com/api/testimonials');
+                const response = await axios.get('https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/testimonials');
                 setTestimonials(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -22,7 +22,7 @@ const HomeComponent3 = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://epics-final-9yio.onrender.com/api/testimonials/${id}`);
+            await axios.delete(`https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/testimonials/${id}`);
             setTestimonials(testimonials.filter((testimonial) => testimonial._id !== id));
         } catch (error) {
             console.error('Error deleting testimonial:', error);

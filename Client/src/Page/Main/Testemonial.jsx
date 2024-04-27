@@ -12,7 +12,7 @@ const TestemonialForm = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://epics-final-9yio.onrender.com/api/testimonials', {
+      const response = await axios.post('https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/testimonials', {
         username,
         email,
         comment,

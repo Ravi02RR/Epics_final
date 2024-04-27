@@ -16,7 +16,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const url = "https://epics-final-9yio.onrender.com/api/auth";
+            const url = "https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/auth";
             const { data: res } = await axios.post(url, data);
             localStorage.setItem("token", res.data);
             localStorage.setItem("name", res.name);

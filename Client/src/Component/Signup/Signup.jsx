@@ -20,7 +20,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const url = "https://epics-final-9yio.onrender.com/api/users";
+            const url = "https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/users";
             const response = await axios.post(url, data);
             navigate("/login");
             console.log(response.data.message);
