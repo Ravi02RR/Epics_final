@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from "react-scroll";
 import { Typewriter } from 'react-simple-typewriter';
+import ChatBot from '../../Component/Chatbot/ChatBot';
 
 const HomeComponent = () => {
     return (
@@ -11,7 +12,7 @@ const HomeComponent = () => {
             <main className="px-4 sm:px-6 lg:px-8 z-10">
                 <div className="text-center">
                     <h2 className="text-3xl tracking-tight leading-10 font-medium sm:text-2xl text-white sm:leading-none md:text-4xl">
-                       <span className="mb-8"> <span className="text-yellow-600 font-bold ">LandOpti</span> - Your Land Optimization Solution!</span>
+                        <span className="mb-8"> <span className="text-yellow-600 font-bold ">LandOpti</span> - Your Land Optimization Solution!</span>
                         <br />
                         <span className="text-white">Unlock the potential of your land with</span>
                         <br />
@@ -19,8 +20,8 @@ const HomeComponent = () => {
                         <br />
                         <span className="text-white">business setup predictions!</span>
                     </h2>
-                    
-                   
+
+
                     <div className="mt-5 sm:mt-8 sm:flex justify-center">
                         <div className="rounded-md shadow">
                             <Link activeClass="active"
@@ -30,7 +31,7 @@ const HomeComponent = () => {
                         </div>
                         <div className="mt-3 sm:mt-0 sm:ml-3">
                             <button onClick={() => document.getElementById('my_modal_4').showModal()} className="  w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-regular rounded-md text-yellow-700 bg-yellow-100 hover:text-yellow-600 hover:bg-yellow-50 focus:outline-none focus:shadow-outline-yellow focus:border-yellow-300 transition duration-150 ease-in-out md:py-4 md:px-10">
-                                Our Customers
+                                Takl to LandOtmi
                             </button>
                         </div>
                     </div>
@@ -38,7 +39,7 @@ const HomeComponent = () => {
                 <dialog id="my_modal_4" className="modal">
                     <div className="modal-box w-11/12 max-w-5xl">
                         <h3 className="font-bold text-lg">LandOpti Live Demo</h3>
-                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum doloremque deleniti iste fugiat illum necessitatibus ullam nobis sit animi mollitia voluptatibus accusantium ipsum non ducimus tempora, eaque temporibus libero.
+                        <ChatBot />
                         <div className="modal-action">
                             <form method="dialog">
                                 <button className="btn">Close</button>
