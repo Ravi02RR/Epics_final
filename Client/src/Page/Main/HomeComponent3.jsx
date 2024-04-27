@@ -31,17 +31,18 @@ const HomeComponent3 = () => {
 
     return (
         <>
-            <div className="p-10">
+           <div className='flex justify-center items-center '>
+           <div className='md:p-10'>
                 <div className='bg-gray-100 overflow-hidden' id='sec2'>
                     <div className="py-12">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className=" mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="text-center">
-                                <h2 className="text-4xl leading-6 font-semibold text-gray-900">Customer Testimonials</h2>
+                                <h2 className="text-3xl font-semibold text-gray-900">Customer Testimonials</h2>
                                 <p className="mt-2 text-lg text-gray-500">See what our customers are saying about us</p>
                             </div>
                         </div>
                     </div>
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 overflow-y-auto max-h-screen ">
+                    <div className=" mx-auto px-4 sm:px-6 lg:px-8 mt-8 overflow-y-auto max-h-screen ">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
                             {testimonials.map((testimonial, index) => (
                                 <Cardtest
@@ -59,6 +60,7 @@ const HomeComponent3 = () => {
                     </div>
                 </div>
             </div>
+           </div>
         </>
     );
 }

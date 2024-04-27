@@ -10,6 +10,7 @@ const Signup = () => {
         password: "",
     });
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false); // New state variable for loading state
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -19,6 +20,7 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const url = "https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/users";
             const response = await axios.post(url, data);
@@ -30,6 +32,8 @@ const Signup = () => {
             } else {
                 setError("An unexpected error occurred.");
             }
+        } finally {
+            setLoading(false); 
         }
     };
 
@@ -41,7 +45,7 @@ const Signup = () => {
                     <div className="card-body">
                         <div>
                             <h1 className="text-2xl font-bold mb-5">Create Account</h1>
-                            <form onSubmit={handleSubmit} >
+                            <form onSubmit={handleSubmit}>
                                 <label className="input input-bordered flex items-center mt-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" /></svg>
                                     <input
@@ -87,11 +91,11 @@ const Signup = () => {
                                     />
                                 </label>
 
-                                <button type="submit" className="btn mt-5  w-full btn-primary">
-                                    Sign Up
+                                <button type="submit" className="btn mt-5 w-full btn-primary" disabled={loading}>
+                                    {loading ? "Signing up..." : "Sign Up"} 
                                 </button>
                             </form>
-                            <label className="mt-4  mb-4">
+                            <label className="mt-4 mb-4">
                                 <Link to="/login" >Already have an account? Login</Link>
                             </label>
                             {error && <div className="text-red-500">{error}</div>}

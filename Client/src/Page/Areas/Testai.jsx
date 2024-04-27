@@ -146,9 +146,11 @@ const Testai = () => {
       });
 
       function draw_callback(data) {
-        console.log(data);
-        console.log(data.Scopes);
+
+        console.log("data", data);
+
       }
+
     }
 
     document.head.appendChild(script);

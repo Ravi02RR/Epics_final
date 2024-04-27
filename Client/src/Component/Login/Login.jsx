@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
     const [data, setData] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
-
+    const [loading, setLoading] = useState(false); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -15,6 +15,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); 
         try {
             const url = "https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/auth";
             const { data: res } = await axios.post(url, data);
@@ -30,6 +31,8 @@ const Login = () => {
             ) {
                 setError(error.response.data.message);
             }
+        } finally {
+            setLoading(false); 
         }
     };
 
@@ -62,8 +65,8 @@ const Login = () => {
                             />
                         </label>
 
-                        <button type="submit" className="btn mt-5 w-full btn-primary">
-                            Sign in
+                        <button type="submit" className="btn mt-5 w-full btn-primary" disabled={loading}>
+                            {loading ? "Signing in..." : "Sign in"}
                         </button>
                     </form>
                     <label className="mt-4 mb-4">

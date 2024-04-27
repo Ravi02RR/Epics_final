@@ -1,9 +1,12 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// eslint-disable-next-line react/prop-types
 const TestemonialForm = ({ user }) => {
+
   const [username, setUsername] = useState(user);
   const [email, setEmail] = useState(localStorage.getItem('email'));
   const [comment, setComment] = useState('');
@@ -26,11 +29,22 @@ const TestemonialForm = ({ user }) => {
       toast.error('Error posting testimonial');
     }
   };
+  const MAX_LENGTH = 60;
+
+  const handleCommentChange = (e) => {
+    const input = e.target.value;
+    if (input.length <= MAX_LENGTH) {
+      setComment(input);
+    } else {
+      alert('Maximum length reached');
+    }
+  };
 
   return (
-    <div className="container mx-auto mt-8 h-screen">
-      <h2 className="text-3xl font-bold mb-4">Post a Testimonial</h2>
+    <div className="container mx-auto mt-8 p-10 h-screen er">
+      
       <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+      <h2 className="text-2xl underline font-bold mb-4  " > Hello {user} Post a Testimonial</h2>
         <div className="mb-4">
           <label htmlFor="username" className="block text-sm font-medium text-gray-700">
             Username
@@ -67,10 +81,13 @@ const TestemonialForm = ({ user }) => {
           <textarea
             id="comment"
             className="mt-1 p-2 border border-gray-300 rounded-md w-full h-32"
-            placeholder="Enter your comment"
+            placeholder="Enter your comment less then 60 characters"
             value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            onChange={handleCommentChange}
+            maxLength={MAX_LENGTH}
+
             required
+
           ></textarea>
         </div>
         <div className="mb-4">
