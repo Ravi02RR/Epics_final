@@ -14,7 +14,7 @@ const ChatBot = () => {
     const LOGO = "https://w7.pngwing.com/pngs/296/534/png-transparent-robot-cute-robot-blue-electronics-humanoid-robot-thumbnail.png";
     const USERICON = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
-    const apiKey = import.meta.env.import.meta.env.Groq_api_key;
+    const apiKey ="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";
     console.log("api key",apiKey)
 
     const chatContainerRef = useRef(null);
