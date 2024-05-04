@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Groq from "groq-sdk";
 import { toast } from "react-toastify";
 
+
 const ChatBot = () => {
     const [inputText, setInputText] = useState("");
     const [messages, setMessages] = useState(() => {
@@ -13,7 +14,8 @@ const ChatBot = () => {
     const LOGO = "https://w7.pngwing.com/pngs/296/534/png-transparent-robot-cute-robot-blue-electronics-humanoid-robot-thumbnail.png";
     const USERICON = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
-    const apiKey = "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";
+    const apiKey = import.meta.env.import.meta.env.Groq_api_key;
+    console.log("api key",apiKey)
 
     const chatContainerRef = useRef(null);
 
