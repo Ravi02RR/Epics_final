@@ -13,7 +13,7 @@ const ChatBot = () => {
     const LOGO = "https://w7.pngwing.com/pngs/296/534/png-transparent-robot-cute-robot-blue-electronics-humanoid-robot-thumbnail.png";
     const USERICON = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
-    const apiKey = "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";
+    const apiKey = "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";
 
     const chatContainerRef = useRef(null);
 
