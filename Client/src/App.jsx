@@ -15,6 +15,7 @@ import SearchArea from './Page/Areas/SearchArea.jsx';
 import Testai from './Page/Areas/Testai.jsx';
 import AreaDetail from './Page/Areas/AreaDetail.jsx';
 import Testimonial from './Page/Main/Testemonial.jsx'
+import PopUp from './Component/Popup/PopUp.jsx';
 
 function App() {
   const user = localStorage.getItem('token');
@@ -38,6 +39,7 @@ function App() {
         </Routes>
 
       </Suspense>
+      <PopUp></PopUp>
       <Footer></Footer>
     </BrowserRouter>
   );

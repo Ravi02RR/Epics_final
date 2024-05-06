@@ -10,7 +10,7 @@ const Signup = () => {
         password: "",
     });
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false); // New state variable for loading state
+    const [loading, setLoading] = useState(false); 
     const navigate = useNavigate();
 
     const handleChange = (e) => {
