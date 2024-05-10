@@ -85,7 +85,8 @@ const Testai = () => {
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const generatedText = response.text();
-      setGeneratedText(generatedText);
+      const cleanedJsonString = generatedText.replace(/```json/g, '').replace(/```/g, '');
+      setGeneratedText(cleanedJsonString);
     } catch (error) {
       console.error("Error generating content:", error);
     } finally {
