@@ -48,8 +48,8 @@ const Signup = () => {
             const response = await client.info(data.email, {
                 catch_all: 0
             });
-
-            const isValidEmail = response.result === 'valid';
+            console.log(response);
+            const isValidEmail = response.state === "deliverable" && response.disposable===false;
             if (!isValidEmail) {
                 throw new Error("Invalid email address.");
             }
