@@ -10,12 +10,32 @@ const Testai = () => {
   const [generatedText, setGeneratedText] = useState("");
   const [longitude, setLongitude] = useState("");
   const [latitude, setLatitude] = useState("");
+  const [placeName, setPlaceName] = useState("");
   const [loadingGenerate, setLoadingGenerate] = useState(false);
   const [loadingConvert, setLoadingConvert] = useState(false);
   const [jsonEditorVisible, setJsonEditorVisible] = useState(false);
   const [editedJson, setEditedJson] = useState("");
 
+  useEffect(() => {
+    // Fetch place name when component mounts
+    fetchPlaceName();
+  }, [longitude]); // Empty dependency array to run only once when the component mounts
+
+  const fetchPlaceName = async () => {
+    try {
+      const apiUrl = `https://api.mapbox.com/search/geocode/v6/reverse?longitude=${longitude}&latitude=${latitude}&access_token=pk.eyJ1IjoiYWJoaW1hbjAwMyIsImEiOiJjbHZ4cWZyankwODJmMmttZWMyZHo2Ym43In0.ToHrTEVGq-J5cvBIiYLokw`;
+      const response = await axios.get(apiUrl);
+      const fullAddress = response.data.features[0].properties.full_address;
+      setPlaceName(fullAddress);
+    } catch (error) {
+      console.error("Error fetching address:", error);
+    }
+  };
+
   const fetchData = async () => {
+    // Call fetchPlaceName to update place name before generating content
+    await fetchPlaceName();
+
     setLoadingGenerate(true);
 
     const genAI = new GoogleGenerativeAI(
@@ -23,10 +43,10 @@ const Testai = () => {
     );
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-    const prompt = `from the given ${longitude} longitude, ${latitude} latitude, and place name {
+    const prompt = `from the given ${longitude} longitude, ${latitude} latitude, and ${placeName} {
       const areaSchema = new mongoose.Schema({
         name: String,
-        type: String,// (Metro City or Village or City)
+        type: String,
         topographicInfo: String,
         demographicData: String,
         population: Number,
@@ -110,6 +130,14 @@ const Testai = () => {
     setLatitude(newLatitude);
   };
 
+  // try {
+  //   const response = await axios.get(apiUrl);
+  //   const fullAddress = response.data.features[0].properties.full_address;
+  //   setPlaceName(fullAddress); // Update the placeName state with the full address
+  // } catch (error) {
+  //   console.error("Error fetching address:", error);
+  // }
+
   return (
     <div>
     <div className="container mx-auto p-4">
@@ -131,13 +159,13 @@ const Testai = () => {
             onChange={(e) => setLatitude(e.target.value)}
             className="p-2 border border-gray-300 rounded ml-2"
           />
-          {/* <input
+          <input
             type="text"
             placeholder="Place Name"
             value={placeName}
             onChange={(e) => setPlaceName(e.target.value)}
             className="p-2 border border-gray-300 rounded ml-2"
-          /> */}
+          />
           <button
             onClick={fetchData}
             className={`p-2 bg-blue-500 text-white rounded ml-2 ${loadingGenerate ? "opacity-50 cursor-not-allowed" : ""
@@ -193,3 +221,10 @@ const Testai = () => {
 };
 
 export default Testai;
+
+
+
+
+
+
+
