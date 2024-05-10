@@ -1,14 +1,15 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import axios from "axios";
 import Loader from "./Loader";
+import MapComponent from "./Map";
+
 
 const Testai = () => {
   const [generatedText, setGeneratedText] = useState("");
   const [longitude, setLongitude] = useState("");
   const [latitude, setLatitude] = useState("");
-  const [placeName, setPlaceName] = useState("");
   const [loadingGenerate, setLoadingGenerate] = useState(false);
   const [loadingConvert, setLoadingConvert] = useState(false);
   const [jsonEditorVisible, setJsonEditorVisible] = useState(false);
@@ -22,9 +23,10 @@ const Testai = () => {
     );
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-    const prompt = `from the given ${longitude} longitude, ${latitude} latitude, and ${placeName} {
+    const prompt = `from the given ${longitude} longitude, ${latitude} latitude, and place name {
       const areaSchema = new mongoose.Schema({
         name: String,
+        type: String,// (Metro City or Village or City)
         topographicInfo: String,
         demographicData: String,
         population: Number,
@@ -103,68 +105,13 @@ const Testai = () => {
     }
   };
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://apis.mappls.com/advancedmaps/api/4579d7f113a70e14a8c0cb1b79860a45/map_sdk?layer=vector&v=3.0&callback=initMap1';
-    script.defer = true;
-    script.async = true;
-
-    window.initMap1 = () => {
-      // eslint-disable-next-line no-undef
-      var map = new mappls.Map('map', { center: [28.638698386592438, 77.27604556863412] });
-
-      map.addListener('polygoncomplete', (polygon) => {
-        const coordinates = polygon.getPath().getArray();
-
-        const center = coordinates.reduce((acc, curr) => {
-          acc.lat += curr.lat();
-          acc.lng += curr.lng();
-          return acc;
-        }, { lat: 0, lng: 0 });
-        center.lat /= coordinates.length;
-        center.lng /= coordinates.length;
-
-        setLatitude(center.lat);
-        setLongitude(center.lng);
-
-        fetchData();
-      });
-
-      map.addListener('load', function () {
-        var options = {
-          fillColor: "red",
-          lineGap: 10,
-          strokeOpacity: 1.0
-        }
-        // eslint-disable-next-line no-undef
-        mappls.draw({
-          map: map,
-          type: 'polygon',
-          callback: draw_callback,
-          options: options
-        });
-      });
-
-      function draw_callback(data) {
-
-        console.log("data", data);
-
-        
-      }
-
-    }
-
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-      delete window.initMap1;
-    };
-  }, []);
-
-
+  const handleCoordinatesUpdate = (newLongitude, newLatitude) => {
+    setLongitude(newLongitude);
+    setLatitude(newLatitude);
+  };
 
   return (
+    <div>
     <div className="container mx-auto p-4">
       <div className="bg-gray-200 p-6 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-4">Data</h2>
@@ -184,13 +131,13 @@ const Testai = () => {
             onChange={(e) => setLatitude(e.target.value)}
             className="p-2 border border-gray-300 rounded ml-2"
           />
-          <input
+          {/* <input
             type="text"
             placeholder="Place Name"
             value={placeName}
             onChange={(e) => setPlaceName(e.target.value)}
             className="p-2 border border-gray-300 rounded ml-2"
-          />
+          /> */}
           <button
             onClick={fetchData}
             className={`p-2 bg-blue-500 text-white rounded ml-2 ${loadingGenerate ? "opacity-50 cursor-not-allowed" : ""
@@ -235,7 +182,12 @@ const Testai = () => {
           </div>
         )}
       </div>
-      <div id="map" style={{ width: '100%', height: '100vh', margin: 0, padding: 0 }}></div>
+
+      <div id="map" style={{ width: '100%', height: '60vh', margin: 0, padding: 0 }}>
+      <MapComponent onCoordinatesUpdate={handleCoordinatesUpdate}/>
+      </div>
+      
+    </div>
     </div>
   );
 };
