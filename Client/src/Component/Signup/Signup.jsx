@@ -10,32 +10,86 @@ const Signup = () => {
         password: "",
     });
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+    
+        
+        const containsNumberOrSymbol = name !== "email" && name !== "password" && /[0-9!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/.test(value);
+    
+       
+        if (containsNumberOrSymbol) {
+            e.preventDefault(); 
+            return; 
+        }
+    
+        
+        setError(containsNumberOrSymbol ? `${name} cannot contain numbers or symbols.` : "");
+    
+        
         setData({ ...data, [name]: value });
     };
+    
+
+
+
+
+    // const validateEmailDomain = async () => {
+    //     const options = {
+    //         method: 'GET',
+    //         url: 'https://mailcheck.p.rapidapi.com/',
+    //         params: {
+    //             domain: 'mailinator.com'
+    //         },
+    //         headers: {
+    //             'X-RapidAPI-Key': '3a764b944emsh1e977780c84d7d5p15868ajsn1efbc8a36042',
+    //             'X-RapidAPI-Host': 'mailcheck.p.rapidapi.com'
+    //         }
+    //     };
+
+    //     try {
+    //         const response = await axios.request(options);
+    //         console.log(response.data);
+    //         return response.data; 
+    //     } catch (error) {
+    //         console.error(error);
+    //         throw new Error('An error occurred while validating the email domain.');
+    //     }
+    // };
+
+
+
+
+
+
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+    
         try {
-            const url = "https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/users";
-            const response = await axios.post(url, data);
-            navigate("/login");
-            console.log(response.data.message);
-        } catch (error) {
-            if (error.response && error.response.data.message) {
-                setError(error.response.data.message);
-            } else {
-                setError("An unexpected error occurred.");
+           
+            const isValidEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(data.email);
+            if (!isValidEmail) {
+                throw new Error("Invalid email address.");
             }
+    
+            const signupUrl = "https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/users";
+            const signupResponse = await axios.post(signupUrl, data);
+            navigate("/login");
+            console.log(signupResponse.data.message);
+        } catch (error) {
+            setError(error.message || "An unexpected error occurred.");
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
+    
+
 
     return (
         <>
@@ -92,7 +146,7 @@ const Signup = () => {
                                 </label>
 
                                 <button type="submit" className="btn mt-5 w-full btn-primary" disabled={loading}>
-                                    {loading ? "Signing up..." : "Sign Up"} 
+                                    {loading ? "Signing up..." : "Sign Up"}
                                 </button>
                             </form>
                             <label className="mt-4 mb-4">
