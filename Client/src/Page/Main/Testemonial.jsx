@@ -2,6 +2,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+
+
+
 import 'react-toastify/dist/ReactToastify.css';
 
 // eslint-disable-next-line react/prop-types
@@ -26,9 +30,18 @@ const TestemonialForm = ({ user }) => {
       window.location.href = '/';
     } catch (error) {
       console.error('Error posting testimonial:', error);
-      toast.error('Error posting testimonial');
+      if (error.response && error.response.data && error.response.data.message) {
+
+        const errorMessage = error.response.data.message;
+
+        toast.error(errorMessage);
+      } else {
+
+        toast.error('Error posting testimonial');
+      }
     }
   };
+
   const MAX_LENGTH = 60;
 
   const handleCommentChange = (e) => {
@@ -42,9 +55,11 @@ const TestemonialForm = ({ user }) => {
 
   return (
     <div className="container mx-auto mt-8 p-10 h-screen er">
-      
+    
+      <ToastContainer  />
+
       <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-      <h2 className="text-2xl underline font-bold mb-4  " > Hello {user} Post a Testimonial</h2>
+        <h2 className="text-2xl underline font-bold mb-4  " > Hello {user} Post a Testimonial</h2>
         <div className="mb-4">
           <label htmlFor="username" className="block text-sm font-medium text-gray-700">
             Username
@@ -103,6 +118,7 @@ const TestemonialForm = ({ user }) => {
                 value={index + 1}
                 onChange={() => setRating(index + 1)}
                 className="mask mask-star-2 bg-orange-400"
+                required
 
               />
             ))}
