@@ -16,21 +16,30 @@ router.get('/testimonials', async (req, res) => {
 // POST a new testimonial
 // POST a new testimonial
 router.post('/testimonials', async (req, res) => {
-    const testimonial = new Testimonial({
-        username: req.body.username,
-        email: req.body.email,
-        comment: req.body.comment,
-        rating: req.body.rating
-    });
-
     try {
+       
+        const testimonial = new Testimonial({
+            username: req.body.username,
+            email: req.body.email,
+            comment: req.body.comment,
+            rating: req.body.rating
+        });
+
+       
+        if (filter.isProfane(testimonial.comment)) {
+            return res.status(400).json({ message: 'Your testimonial contains inappropriate language.' });
+        }
+
+        
         const newTestimonial = await testimonial.save();
+
+        
         res.status(201).json(newTestimonial);
     } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
+      
+        res.status(400).json({ message: err.message });
+    }
 });
-
 
 // DELETE a testimonial
 router.delete('/testimonials/:id', async (req, res) => {
