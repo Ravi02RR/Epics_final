@@ -4,6 +4,8 @@ const Testimonial = require('../models/Model.comment.js')
 const mongoose = require('mongoose')
 const BadWordsFilter = require('bad-words');
 const filter = new BadWordsFilter();
+var badwordsArray = require('badwords/array');
+filter.addWords(...badwordsArray)
 
 
 
