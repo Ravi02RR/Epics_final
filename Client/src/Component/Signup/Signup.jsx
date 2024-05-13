@@ -49,12 +49,12 @@ const Signup = () => {
                 catch_all: 0
             });
             console.log(response);
-            const isValidEmail = response.state === "deliverable" && response.disposable===false;
+            const isValidEmail = response.state === "deliverable" && response.disposable === false;
             if (!isValidEmail) {
                 throw new Error("Invalid email address.");
             }
 
-            const signupUrl = "https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/users";
+            const signupUrl = "https://epics-final-i5eq.vercel.app/api/users";
             await axios.post(signupUrl, data);
             navigate("/login");
 

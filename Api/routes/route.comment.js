@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Testimonial = require('../models/Model.comment.js')
 const mongoose = require('mongoose')
+const BadWordsFilter = require('bad-words');
+const filter = new BadWordsFilter();
+
+
 
 // GET all testimonials
 router.get('/testimonials', async (req, res) => {
@@ -13,7 +17,6 @@ router.get('/testimonials', async (req, res) => {
     }
 });
 
-// POST a new testimonial
 // POST a new testimonial
 router.post('/testimonials', async (req, res) => {
     try {

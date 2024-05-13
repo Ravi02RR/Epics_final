@@ -20,7 +20,7 @@ const Contact = ({ name }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/contact', formData);
+            await axios.post('https://epics-final-i5eq.vercel.app/api/contact', formData);
             setSuccessMessage('Your message has been submitted successfully!');
             setFormData({ name: '', email: '', phoneNumber: '', message: '' });
         } catch (error) {

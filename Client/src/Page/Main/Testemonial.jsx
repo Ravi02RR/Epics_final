@@ -19,7 +19,7 @@ const TestemonialForm = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/testimonials', {
+      const response = await axios.post('https://epics-final-i5eq.vercel.app/api/testimonials', {
         username,
         email,
         comment,
@@ -55,8 +55,8 @@ const TestemonialForm = ({ user }) => {
 
   return (
     <div className="container mx-auto mt-8 p-10 h-screen er">
-    
-      <ToastContainer  />
+
+      <ToastContainer />
 
       <form onSubmit={handleSubmit} className="max-w-md mx-auto">
         <h2 className="text-2xl underline font-bold mb-4  " > Hello {user} Post a Testimonial</h2>

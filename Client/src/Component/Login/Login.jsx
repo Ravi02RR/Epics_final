@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
     const [data, setData] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -15,9 +15,9 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true); 
+        setLoading(true);
         try {
-            const url = "https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/auth";
+            const url = "https://epics-final-i5eq.vercel.app/api/auth";
             const { data: res } = await axios.post(url, data);
             localStorage.setItem("token", res.data);
             localStorage.setItem("name", res.name);
@@ -32,7 +32,7 @@ const Login = () => {
                 setError(error.response.data.message);
             }
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
 
