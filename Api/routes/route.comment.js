@@ -4,8 +4,13 @@ const Testimonial = require('../models/Model.comment.js')
 const mongoose = require('mongoose')
 const BadWordsFilter = require('bad-words');
 const filter = new BadWordsFilter();
-var badwordsArray = require('badwords/array');
+let badwordsArray = require('badwords/array');
+var profanity = require("profanity-hindi");
 filter.addWords(...badwordsArray)
+
+
+
+
 
 
 
@@ -26,7 +31,7 @@ router.post('/testimonials', async (req, res) => {
         const testimonial = new Testimonial({
             username: req.body.username,
             email: req.body.email,
-            comment: req.body.comment,
+            comment: profanity.maskBadWords(req.body.comment),
             rating: req.body.rating
         });
 
