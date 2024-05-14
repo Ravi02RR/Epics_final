@@ -16,7 +16,7 @@ function AreaDetail() {
 
   const fetchAreaDetail = async () => {
     try {
-      const response = await axios.get(`https://epics-final-i5eq-git-main-ravi02rrs-projects.vercel.app/api/areas/${id}`);
+      const response = await axios.get(`https://epics-final-i5eq.vercel.app/api/areas/${id}`);
       setArea(response.data);
       setLoading(false);
     } catch (error) {

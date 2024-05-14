@@ -2,6 +2,17 @@ const express = require('express');
 const router = express.Router();
 const Testimonial = require('../models/Model.comment.js')
 const mongoose = require('mongoose')
+const BadWordsFilter = require('bad-words');
+const filter = new BadWordsFilter();
+let badwordsArray = require('badwords/array');
+var profanity = require("profanity-hindi");
+filter.addWords(...badwordsArray)
+
+
+
+
+
+
 
 // GET all testimonials
 router.get('/testimonials', async (req, res) => {
@@ -14,14 +25,13 @@ router.get('/testimonials', async (req, res) => {
 });
 
 // POST a new testimonial
-// POST a new testimonial
 router.post('/testimonials', async (req, res) => {
     try {
        
         const testimonial = new Testimonial({
             username: req.body.username,
             email: req.body.email,
-            comment: req.body.comment,
+            comment: profanity.maskBadWords(req.body.comment),
             rating: req.body.rating
         });
 
