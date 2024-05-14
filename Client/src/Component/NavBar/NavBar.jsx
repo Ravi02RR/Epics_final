@@ -54,7 +54,7 @@ const Navbar = () => {
                         <Tooltip></Tooltip>
                         {isLoggedIn && (
                             <button className="btn " onClick={handleLogout}>
-                                <FaSignOutAlt />Logout
+                                <FaSignOutAlt />
                             </button>
                         )}
                     </div>
