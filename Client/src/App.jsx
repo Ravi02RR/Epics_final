@@ -4,7 +4,7 @@ import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import './App.css';
 import NavBar from './Component/NavBar/NavBar.jsx';
 import Footer from './Component/NavBar/Footer.jsx';
-import Tooltip from './Component/Tooltip.jsx';
+
 
 // Importing components only once
 import Signup from './Component/Signup/Signup.jsx';
@@ -42,7 +42,7 @@ function App() {
       </Suspense>
       
       <Footer></Footer>
-      <Tooltip />
+      
     </BrowserRouter>
   );
 }
