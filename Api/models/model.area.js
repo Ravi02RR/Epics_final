@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const areaSchema = new mongoose.Schema({
   name: String,
-  type:String,
   topographicInfo: String,
   demographicData: String,
   population: Number,

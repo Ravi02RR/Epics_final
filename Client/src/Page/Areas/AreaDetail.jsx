@@ -4,6 +4,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 function AreaDetail() {
+  const [result,setresult] = useState("");
+  const [capital,setcapital] = useState(0);
   const [area, setArea] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
@@ -22,6 +24,33 @@ function AreaDetail() {
       setLoading(false);
     }
   };
+
+  const handleCapitalChange = (event) => {
+    setcapital(event.target.value);
+  };
+
+  const fetchfromfalsk = async ()=>{
+    try {
+      const stringToSend = area.name; 
+  
+      const formData = new FormData();
+      formData.append('myString', stringToSend);
+      formData.append('capital', capital);
+  
+      axios.post("http://127.0.0.1:5000/res", formData)
+        .then((res) => {
+          console.log(res);
+          setresult(res.data.message); 
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+  
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
   return (
     <div className="container mx-auto p-8">
@@ -101,6 +130,14 @@ function AreaDetail() {
                     </table>
                   </td>
                 </tr>
+
+                  <div className="flask-res">
+                      <div className="result">{result}</div>
+                      <input className="capital" value={capital} onChange={handleCapitalChange}></input>
+                      <button onClick={fetchfromfalsk} >Evaluate</button>
+                  </div>
+
+
               </tbody>
             </table>
           </div>
