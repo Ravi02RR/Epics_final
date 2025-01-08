@@ -46,7 +46,6 @@ const Testai = () => {
     const prompt = `from the given ${longitude} longitude, ${latitude} latitude, and ${placeName} {
       const areaSchema = new mongoose.Schema({
         name: String,
-        type: String,
         topographicInfo: String,
         demographicData: String,
         population: Number,
@@ -79,7 +78,7 @@ const Testai = () => {
           coordinates: [Number],
           address: String,
         }
-      }); generate json data for this mongo model with real coordinate information also reaplce place name with real place name  `;
+      }); generate json data for this mongo model with real coordinate information also reaplce place name with the district name only. `;
 
     try {
       const result = await model.generateContent(prompt);
